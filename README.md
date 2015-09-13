@@ -8,7 +8,9 @@ Currently, it only supports the NYC subway.
 # Utterance examples:
 
 Alexa, ask subway status of all lines
+
 Alexa, ask subway status of [the] 7 line
+
 Alexa, ask subway status of [the] A C E lines
 
 # Running
