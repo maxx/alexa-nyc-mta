@@ -1,5 +1,4 @@
-# alexa-nyc-subway
-Amazon Alexa NYC MTA Status Skill
+# Amazon Alexa NYC MTA Status Skill - NYC Subway Status on Amazon Echo (Alexa!)
 
 
 This is a simple alexa skill which will allow you to query the status of NYC MTA transport.
