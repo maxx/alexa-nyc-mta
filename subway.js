@@ -8,25 +8,25 @@ app.post('/subway', function (req, res) {
     var parseString = require('xml2js').parseString;
 
     parseString(data, function (err, result) {
-    //console.log(result);
-    if (err) {
-      return console.log(err);
-    }
-    console.log("result: ",result["service"]["subway"]);
+      //console.log(result);
+      if (err) {
+        return console.log(err);
+      }
+      console.log("query: ",req.query);
+  
+      console.log("Got request: %o", req);
 
-    console.log("Got request: %o", req);
+      say_this = "";
 
-    say_this = "";
+      for (var i=0; i<result["service"]["subway"][0]["line"].length;i++) {
+        line = result["service"]["subway"][0]["line"][i];
+        say_this = say_this.concat(line["name"][0].replace(/(\S{1})/g,"$1 "))
+        say_this = say_this.concat("line has ")
+        say_this = say_this.concat(line["status"][0])
+        say_this = say_this.concat(", ")
+      };
 
-    for (var i=0; i<result["service"]["subway"][0]["line"].length;i++) {
-      line = result["service"]["subway"][0]["line"][i];
-      say_this = say_this.concat(line["name"][0].replace(/(\S{1})/g,"$1 "))
-      say_this = say_this.concat("line has ")
-      say_this = say_this.concat(line["status"][0])
-      say_this = say_this.concat(", ")
-    };
-
-    console.log("say this is:", say_this)
+      console.log("say this is:", say_this)
 
     text = {"outputSpeech": {"type": "PlainText", "text": say_this}}
     response = { 
@@ -37,7 +37,8 @@ app.post('/subway', function (req, res) {
     } 
 
     console.log("Sending response: ", JSON.stringify(response))
-      res.send(JSON.stringify(response));
+    res.send(JSON.stringify(response));
+ 
     });
   });
 });
