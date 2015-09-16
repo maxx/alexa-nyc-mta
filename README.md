@@ -7,7 +7,11 @@ Currently, it only supports the NYC subway.
 
 # Utterance examples:
 
+Current:
+
 Alexa, ask subway status of all lines
+
+Todo:
 
 Alexa, ask subway status of [the] 7 line
 
