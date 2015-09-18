@@ -17,7 +17,8 @@ Alexa, ask subway to get status of [the] A C E lines
 
 Todo: 
 
-Summarize all line delays/outages rather than spilling each status
+* Move to ruby/sinatra. Can't stand the spaghetti anymore.
+* Summarize all line delays/outages rather than spilling each status
 
 # Running
 
