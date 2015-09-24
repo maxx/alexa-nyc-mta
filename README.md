@@ -11,11 +11,14 @@ Current:
 
 Alexa, ask subway status of all lines
 
-Todo:
+Alexa, ask subway to get status of [the] 7 line
 
-Alexa, ask subway status of [the] 7 line
+Alexa, ask subway to get status of [the] A C E lines
 
-Alexa, ask subway status of [the] A C E lines
+Todo: 
+
+* Move to ruby/sinatra. Can't stand the spaghetti anymore.
+* Summarize all line delays/outages rather than spilling each status
 
 # Running
 
