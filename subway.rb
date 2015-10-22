@@ -20,42 +20,58 @@ post '/subway' do
        puts "intent #{intent}"
        say_this = ""
        if (intent == "GetAllStatus" || intent == nil)
-          say_this = "ok. hold on... "
+          good_lines = status.select { |key, value| value.match("GOOD SERVICE")}.transpose[0]
           delayed_lines = status.select { |key, value| value.match("DELAYS")}.transpose[0]
           planned_work_lines = status.select { |key, value| value.match("PLANNED WORK")}.transpose[0]
-          if (delayed_lines && (delayed_lines.count > 0 || planned_work_lines.count > 0))
-              #puts "delayed_lines count is #{delayed_lines.count}"
-              if (delayed_lines.count > 0)
-                 if (delayed_lines.count == 1)
-                    delayed_line = delayed_lines[0].gsub(/(.{1})/, '\1 ')
-                    say_this << "The #{delayed_line} is currently experiencing delays. " 
-                 else
-                    delayed_lines.each do |delayed_line| 
-                       delayed_line = delayed_line.gsub(/(.{1})/, '\1 ')
-                       say_this << "The #{delayed_line} is currently experiencing delays.  " 
-                    end
-                 end
-              end
-              if (planned_work_lines.count > 0)
-                 if (planned_work_lines.count == 1)
-                    planned_work_line = planned_work_lines[0].gsub(/(.{1})/, '\1 ')
-                    say_this << "The #{planned_work_line} is currently undergoing planned work.  " 
-                 else
-                    planned_work_lines.each do |planned_work_line| 
-                       planned_work_line = planned_work_line.gsub(/(.{1})/, '\1 ')
-                       say_this << "The #{planned_work_line} is currently undergoing planned work.  " 
-                    end
-                 end
-              end
+          service_change_lines = status.select { |key, value| value.match("SERVICE CHANGE")}.transpose[0]
+          puts "good lines are #{good_lines}"
+          if (delayed_lines || planned_work_lines || service_change_lines)
+             say_this = "ok. here's the situation... "
+             if (delayed_lines && delayed_lines.count > 0)
+                if (delayed_lines.count == 1)
+                   delayed_line = delayed_lines[0].gsub(/(.{1})/, '\1 ')
+                   say_this << "The #{delayed_line} is currently experiencing delays. " 
+                else
+                   delayed_lines.each do |delayed_line| 
+                      delayed_line = delayed_line.gsub(/(.{1})/, '\1 ')
+                      say_this << "The #{delayed_line} is currently experiencing delays.  " 
+                   end
+                end
+             end
+             if (planned_work_lines && planned_work_lines.count > 0)
+                puts "planned_work_lines are #{planned_work_lines}"
+                if (planned_work_lines.count == 1)
+                   planned_work_litne = planned_work_lines[0].gsub(/(.{1})/, '\1 ')
+                   say_this << "The #{planned_work_line} is currently undergoing planned work.  " 
+                else
+                   planned_work_lines.each do |planned_work_line| 
+                      planned_work_line = planned_work_line.gsub(/(.{1})/, '\1 ')
+                      say_this << "The #{planned_work_line} is currently undergoing planned work.  " 
+                   end
+                end
+             end
+             if (service_change_lines && service_change_lines.count > 0)
+                if (service_change_lines.count == 1)
+                   service_change_litne = service_change_lines[0].gsub(/(.{1})/, '\1 ')
+                   say_this << "The #{service_change_line} has a major service change.  " 
+                else
+                   service_change_lines.each do |service_change_line| 
+                      service_change_line = service_change_line.gsub(/(.{1})/, '\1 ')
+                      say_this << "The #{service_change_line} has a major service change.  " 
+                   end
+                end
+             end
+
+             say_this << "All other lines are currently running smoothly."
           else
-              say_this << "All lines are currently running smoothly."
+             say_this = "ok. Great news. "
+             say_this << "All lines are currently running smoothly."
           end
           
-          puts "delayed lines are #{delayed_lines}"
           #say_this = "The #{delayed_lines}" 
        else
      
-         say_this = "I can't do status of individual lines yet in this version"
+         say_this = "I can't do status of individual lines yet. Please check back in a few days."
          
        end
 
