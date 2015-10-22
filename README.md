@@ -9,7 +9,9 @@ Currently, it only supports the NYC subway.
 
 Current:
 
-Alexa, ask subway status of all lines
+Alexa, open subway
+
+Alexa, ask subway about all lines
 
 Alexa, ask subway to get status of [the] 7 line
 
@@ -17,8 +19,8 @@ Alexa, ask subway to get status of [the] A C E lines
 
 Todo: 
 
-* Move to ruby/sinatra. Can't stand the spaghetti anymore.
-* Summarize all line delays/outages rather than spilling each status
+* Break subway data into model/class
+* Add support for invidual lines again using keywords, like "ace" for A C E, as Alexa can't hear individual letters currently.
 
 # Running
 
@@ -29,7 +31,7 @@ A crontab entry is necessary to pull down serviceStatus.txt every 5 minutes from
 
 */5 * * * * curl http://web.mta.info/status/serviceStatus.txt > /home/maxx/alexa_nyc_subway/serviceStatus.txt
 
-And simply run "nodejs subway.js" via upstart or you preferred method.
+Simply run "ruby subway.rb" to sample or run in passenger or your favorite app server.
 
 # Nginx
 
