@@ -5,6 +5,10 @@ This is a simple alexa skill which will allow you to query the status of NYC MTA
 
 Currently, it only supports the NYC subway.
 
+# Amazon Feedback / Requirements
+
+Working spreadsheeet: https://docs.google.com/spreadsheets/d/15goECEyoLIs8mYvrAC25RZyRWwUqew7zgBiLMiux2A8
+
 # Utterance examples:
 
 Current:
