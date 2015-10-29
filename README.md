@@ -45,3 +45,6 @@ Simply run "ruby subway.rb" to sample or run in passenger or your favorite app s
 
 Alexa skills API will only reach a service on https with a signed or self-signed (providec) certificate.  Use the included example nginx virtual-host configuration to proxy to nodejs.
 
+* Not Affiliated with the New York City MTA
+
+This skill and its creator are not in any way affiliated with the NYC MTA.
