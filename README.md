@@ -17,6 +17,10 @@ Alexa, open subway
 
 Alexa, ask subway about all lines
 
+Soon:
+
+(Currently, alexa cannot reconize letters - only words.. so might have to do some lexical analysis on things e.g. "for" -> 4.)
+
 Alexa, ask subway to get status of [the] 7 line
 
 Alexa, ask subway to get status of [the] A C E lines
