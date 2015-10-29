@@ -25,7 +25,7 @@ def lines_from_state(lines)
 end
 
 
-post '/subway' do 
+post '/subway/v0.1' do 
    begin
        subway = AlexaNYCMTA.new 
        status = subway.subway_status
