@@ -50,4 +50,8 @@
 
 
 	The materials appearing on Alexa MTA Skill's web site could include technical, typographical, or photographic errors. Alexa MTA Skill does not warrant that any of the materials on its web site are accurate, complete, or current. Alexa MTA Skill may make changes to the materials contained on its web site at any time without notice. Alexa MTA Skill does not, however, make any commitment to update the materials.
+	
+	6. Not Affiliated with the New York City MTA
+
+This skill and its creator are not in any way affiliated with the NYC MTA.
 
