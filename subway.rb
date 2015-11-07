@@ -25,7 +25,7 @@ def lines_from_state(lines)
 end
 
 
-post '/subway/v0.1' do 
+post '/subway/v1.0' do 
    begin
        subway = AlexaNYCMTA.new 
        status = subway.subway_status
@@ -89,7 +89,7 @@ post '/subway/v0.1' do
    end 
    text = {"outputSpeech" => {"type" => "PlainText", "text" => say_this}}
    response = {
-       "version" => "0.2",
+       "version" => "1.0",
        "sessionAttributes" => { "someInfoOnPreviousRequest" => { "last_line" => "something" } },
         "response" => text,
         "shouldEndSession" => true
