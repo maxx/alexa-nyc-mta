@@ -4,6 +4,7 @@
 require 'sinatra'
 require 'nokogiri'
 require 'json'
+require 'alexa_verifier'
 
 require_relative 'lib/alexa_nyc_mta'
 
@@ -24,13 +25,28 @@ def lines_from_state(lines)
    line_text
 end
 
+verifier = AlexaVerifier.build do |c|
+  c.verify_signatures = true
+  c.verify_timestamps = true
+  c.timestamp_tolerance = 60 # seconds
+end
 
 post '/subway/v1.0' do 
    begin
        subway = AlexaNYCMTA.new 
        status = subway.subway_status
-       
-       request_body = JSON.parse request.body.read
+
+       request_body_unparsed = request.body.read
+
+       authentic = verifier.verify!(
+           request.env['HTTP_SIGNATURECERTCHAINURL'], 
+           request.env['HTTP_SIGNATURE'],
+           request_body_unparsed
+       )
+
+       puts "authenticity is #{authentic}"
+           
+       request_body = JSON.parse request_body_unparsed
        puts "request body is #{request_body}"
 #       puts "subway #{status}"
        intent = request_body["request"]["intent"]["name"] if request_body["request"]["intent"]
@@ -83,18 +99,24 @@ post '/subway/v1.0' do
          
        end
 
-#   rescue
-#      say_this = "rut roh. something failed"
+   rescue
+     say_this = "rut roh. something failed"
 
    end 
    text = {"outputSpeech" => {"type" => "PlainText", "text" => say_this}}
-   response = {
-       "version" => "1.0",
-       "sessionAttributes" => { "someInfoOnPreviousRequest" => { "last_line" => "something" } },
-        "response" => text,
-        "shouldEndSession" => true
-   } 
- 
+
+   if (authentic)
+      response = {
+          "version" => "1.0",
+          "response" => text,
+          "shouldEndSession" => true
+      } 
+   else
+      response = {
+         "error" => "your response does not appear to be from a real alexa"
+      }
+   end 
+
    puts "response: #{response.to_json}"
  
    response.to_json
