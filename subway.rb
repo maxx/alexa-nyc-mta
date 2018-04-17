@@ -31,6 +31,10 @@ verifier = AlexaVerifier.build do |c|
   c.timestamp_tolerance = 60 # seconds
 end
 
+get '/subway/' do
+    "app is alive"
+end
+
 post '/subway/v1.0' do 
    begin
        subway = AlexaNYCMTA.new 
